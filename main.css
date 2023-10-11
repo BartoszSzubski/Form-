@@ -30,7 +30,7 @@ body {
 }
 
 form {
-  min-width: 500px;
+  max-width: 500px;
   min-height: 500px;
   background-color: rgba(49, 47, 43, 0.75);
   padding: 25px 40px;
@@ -47,8 +47,8 @@ form {
   margin-bottom: 30px;
 }
 
-input,
-button {
+.input__placeholder,
+.button__login {
   border: none;
   border-radius: 15px;
   padding: 30px 12px;
@@ -58,12 +58,12 @@ button {
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
 }
-input:hover,
-button:hover {
+.input__placeholder:hover,
+.button__login:hover {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 54px 55px, rgba(0, 0, 0, 0.25) 0px -12px 30px, rgba(0, 0, 0, 0.19) 0px 4px 6px, rgba(0, 0, 0, 0.29) 0px 12px 13px, rgba(0, 0, 0, 0.15) 0px -3px 5px;
 }
 
-label {
+.label__placeholder {
   color: var(--turquoise);
   text-align: center;
   font-style: italic;
@@ -76,29 +76,29 @@ label {
   opacity: 0.65;
 }
 
-input {
+.input__placeholder {
   width: 100%;
   font-size: 3rem;
   color: var(--color-white);
   font-style: italic;
   padding-left: 3rem;
 }
-input:not(:-moz-placeholder-shown) + label {
+.input__placeholder:not(:-moz-placeholder-shown) + label {
   left: 300px;
   opacity: 0;
 }
-input:focus + label, input:not(:placeholder-shown) + label {
+.input__placeholder:focus + label, .input__placeholder:not(:placeholder-shown) + label {
   left: 300px;
   opacity: 0;
 }
-input:hover {
+.input__placeholder:hover {
   outline: solid 3px rgba(83, 81, 69, 0.8);
 }
 
-button {
+.button__login {
   display: block;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 3rem;
   padding: 20px 50px;
   color: var(--color-white);
   min-width: 100px;
@@ -108,7 +108,7 @@ button {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
 }
-button:hover {
+.button__login:hover {
   background-color: rgba(83, 81, 69, 0.8);
   color: var(--turquoise);
 }
@@ -130,7 +130,7 @@ button:hover {
   bottom: 0;
   width: 0;
   height: 1px;
-  background-color: rgba(182, 182, 175, 0.55);
+  background-color: rgba(173, 157, 112, 0.4);
   transition: width 0.3s ease;
 }
 .form__paragraph span:hover {
@@ -139,6 +139,11 @@ button:hover {
 .form__paragraph span:hover::before {
   width: 100%;
 }
+.form__paragraph span .register-link,
+.form__paragraph span .login-link {
+  color: var(--turquoise);
+  text-decoration: none;
+}
 
 .form__spacer {
   background: rgba(182, 182, 175, 0.55);
@@ -146,4 +151,37 @@ button:hover {
   height: 2px;
   width: 80%;
   margin: 0 auto;
+}
+
+.form__title {
+  text-align: center;
+  color: var(--color-white);
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.form__checkbox-remember {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+}
+.form__checkbox-remember a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: var(--color-white);
+}
+.form__checkbox-remember a:hover {
+  color: rgb(173, 157, 112);
+}
+.form__checkbox-remember .label__input-checkbox {
+  font-size: 2rem;
+  color: var(--color-white);
+}
+.form__checkbox-remember .label__input-checkbox .input__checkbox {
+  outline: none;
+}
+
+.login__section {
+  display: none;
 }/*# sourceMappingURL=main.css.map */

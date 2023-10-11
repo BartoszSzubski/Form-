@@ -13,18 +13,86 @@
     />
   </head>
   <body>
-    <form autocomplete="off">
-      <div class="form__input-container">
-        <input id="user" type="text" placeholder=" " />
-        <label for="user">User ID</label>
-      </div>
-      <div class="form__input-container">
-        <input id="password" type="password" placeholder=" " />
-        <label for="password">Password</label>
-      </div>
-      <div class="form__spacer"></div>
-      <button>Login</button>
-      <p class="form__paragraph">Not a member? <span>Signup now!</span></p>
-    </form>
+    <div class="login__section">
+      <form autocomplete="off">
+        <p class="form__title">Sign In</p>
+        <div class="form__input-container">
+          <input
+            class="input__placeholder"
+            id="user"
+            type="text"
+            placeholder=" "
+          />
+          <label class="label__placeholder" for="user">User ID</label>
+        </div>
+        <div class="form__input-container">
+          <input
+            class="input__placeholder"
+            id="password"
+            type="password"
+            placeholder=" "
+          />
+          <label class="label__placeholder" for="password">Password</label>
+        </div>
+        <div class="form__spacer"></div>
+        <div class="form__checkbox-remember">
+          <label for="" class="label__input-checkbox">
+            <input type="checkbox" class="input__checkbox" /> Remember me
+          </label>
+          <a href="#">Forgot Password?</a>
+        </div>
+        <button class="button__login">Login</button>
+        <p class="form__paragraph">
+          Not a member?
+          <span> <a href="#" class="register-link">Signup now!</a></span>
+        </p>
+      </form>
+    </div>
+    <!--section distinction-->
+    <div class="registration__section">
+      <form autocomplete="off">
+        <p class="form__title">Registration</p>
+        <div class="form__input-container">
+          <input
+            class="input__placeholder"
+            id="user"
+            type="text"
+            placeholder=" "
+          />
+          <label class="label__placeholder" for="user">User ID</label>
+        </div>
+        <div class="form__input-container">
+          <input
+            class="input__placeholder"
+            id="user"
+            type="email"
+            placeholder=" "
+          />
+          <label class="label__placeholder" for="user">Email</label>
+        </div>
+        <div class="form__input-container">
+          <input
+            class="input__placeholder"
+            id="password"
+            type="password"
+            placeholder=" "
+          />
+          <label class="label__placeholder" for="password">Password</label>
+        </div>
+        <div class="form__spacer"></div>
+        <div class="form__checkbox-remember">
+          <label for="" class="label__input-checkbox">
+            <input type="checkbox" class="input__checkbox" /> I have read and
+            comply with the <a href="#">regulations</a>
+          </label>
+        </div>
+        <button class="button__login">Register</button>
+        <p class="form__paragraph">
+          Already have an account?
+          <span><a href="#" class="login-link">Login here!</a></span>
+        </p>
+      </form>
+    </div>
+    <script src="script.js"></script>
   </body>
 </html>
