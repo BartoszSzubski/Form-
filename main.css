@@ -182,6 +182,9 @@ form {
   outline: none;
 }
 
-.login__section {
-  display: none;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-color: rgba(114, 109, 101, 0.7) !important;
 }/*# sourceMappingURL=main.css.map */
