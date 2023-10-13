@@ -15,3 +15,18 @@ registerLink.addEventListener("click", () => {
 
 // default
 registerForm.style.display = "none";
+
+//forgot password section
+const aForgotPass = document.querySelector(".a__forgot-password");
+const forgotForm = document.querySelector(".forgot");
+const forgotLink = document.querySelector(".forgot-link");
+
+aForgotPass.addEventListener("click", () => {
+  forgotForm.style.display = "block";
+  loginForm.style.display = "none";
+});
+
+forgotLink.addEventListener("click", () => {
+  forgotForm.style.display = "none";
+  loginForm.style.display = "block";
+});
