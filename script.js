@@ -30,3 +30,21 @@ forgotLink.addEventListener("click", () => {
   forgotForm.style.display = "none";
   loginForm.style.display = "block";
 });
+
+//terms of use section
+const popupTerms = document.querySelector(".popup__terms__section");
+const buttonAccept = document.querySelector(".btn-accept");
+const buttonDecline = document.querySelector(".btn-decline");
+const openRegulations = document.querySelector(".regulations-button");
+
+buttonAccept.addEventListener("click", () => {
+  popupTerms.style.display = "none";
+});
+
+buttonDecline.addEventListener("click", () => {
+  popupTerms.style.display = "none";
+});
+
+openRegulations.addEventListener("click", () => {
+  popupTerms.style.display = "flex";
+});
