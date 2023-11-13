@@ -4,17 +4,14 @@ const loginLink = document.querySelector(".login-link");
 const registerLink = document.querySelector(".register-link");
 
 loginLink.addEventListener("click", () => {
-  loginForm.style.display = "block";
-  registerForm.style.display = "none";
+  loginForm.classList.add("form__section--active");
+  registerForm.classList.remove("form__section--active");
 });
 
 registerLink.addEventListener("click", () => {
-  loginForm.style.display = "none";
-  registerForm.style.display = "block";
+  registerForm.classList.add("form__section--active");
+  loginForm.classList.remove("form__section--active");
 });
-
-// default
-registerForm.style.display = "none";
 
 //forgot password section
 const aForgotPass = document.querySelector(".a__forgot-password");
@@ -22,13 +19,13 @@ const forgotForm = document.querySelector(".forgot");
 const forgotLink = document.querySelector(".forgot-link");
 
 aForgotPass.addEventListener("click", () => {
-  forgotForm.style.display = "block";
-  loginForm.style.display = "none";
+  forgotForm.classList.add("form__section--active");
+  loginForm.classList.remove("form__section--active");
 });
 
 forgotLink.addEventListener("click", () => {
-  forgotForm.style.display = "none";
-  loginForm.style.display = "block";
+  loginForm.classList.add("form__section--active");
+  forgotForm.classList.remove("form__section--active");
 });
 
 //terms of use section
@@ -85,7 +82,7 @@ const showSuccess = (element, message) => {
   inputControl.classList.remove("error");
 };
 
-const validateUserInput = () => {
+const validateUserInput = (isOnInput) => {
   const userValue = user.value.trim();
 
   if (userValue === "") {
@@ -122,27 +119,39 @@ showSuccess(password, "");
 const newPassword = document.getElementById("newpassword");
 const confirmPassword = document.getElementById("confirmpassword");
 const confirmPasswordError = document.querySelector(".error__forgot");
+const forgotPasswordSubmit = document.querySelector(".button__new-password");
 
 confirmPassword.addEventListener("blur", () => {
   validatePasswordsMatch();
 });
 
-const validatePasswordsMatch = () => {
+forgotPasswordSubmit.addEventListener("click", () => {
+  validatePasswordsMatch(true);
+});
+
+const validatePasswordsMatch = (isSubmit = false) => {
   const newPasswordValue = newPassword.value.trim();
   const confirmPasswordValue = confirmPassword.value.trim();
 
   if (newPasswordValue === "" || confirmPasswordValue === "") {
     showError(confirmPasswordError, "Passwords cannot be empty");
+    confirmPasswordError.classList.remove("success-message");
   } else if (newPasswordValue !== confirmPasswordValue) {
     showError(confirmPasswordError, "Passwords do not match");
+    confirmPasswordError.classList.remove("success-message");
   } else if (newPasswordValue.length < 8) {
     showError(
       confirmPasswordError,
       "Password must contain at least 8 characters"
     );
+    confirmPasswordError.classList.remove("success-message");
   } else {
     showSuccess(confirmPasswordError, "Passwords match!");
     confirmPasswordError.classList.add("success-message");
+    if (isSubmit) {
+      loginForm.classList.add("form__section--active");
+      forgotForm.classList.remove("form__section--active");
+    }
   }
 };
 

@@ -13,31 +13,35 @@
     />
   </head>
   <body>
-    <div class="form__section login">
+    <div class="form__section form__section--active login">
       <form id="form" autocomplete="off">
         <p class="form__title">Sign In</p>
-        <div class="form__input-container">
-          <input
-            class="input__placeholder"
-            id="user"
-            type="text"
-            placeholder=" "
-            required
-          />
-          <label class="label__placeholder" for="user">User ID</label>
-          <div class="error">Something is wrong with login</div>
+
+        <div class="form__group">
+          <div class="form__input-container">
+            <input
+              class="input__placeholder"
+              id="user"
+              type="text"
+              placeholder=" "
+              required
+            />
+            <label class="label__placeholder" for="user">User ID</label>
+            <div class="error">Something is wrong with login</div>
+          </div>
+          <div class="form__input-container">
+            <input
+              class="input__placeholder"
+              id="password"
+              type="password"
+              placeholder=" "
+              required
+            />
+            <label class="label__placeholder" for="password">Password</label>
+            <div class="error">Something is wrong with password</div>
+          </div>
         </div>
-        <div class="form__input-container">
-          <input
-            class="input__placeholder"
-            id="password"
-            type="password"
-            placeholder=" "
-            required
-          />
-          <label class="label__placeholder" for="password">Password</label>
-          <div class="error">Something is wrong with password</div>
-        </div>
+
         <div class="form__spacer"></div>
         <div class="form__checkbox-remember">
           <label for="checkbox-remember-me" class="label__input-checkbox">
@@ -62,37 +66,39 @@
     <div class="form__section register">
       <form autocomplete="off">
         <p class="form__title">Registration</p>
-        <div class="form__input-container">
-          <input
-            class="input__placeholder"
-            id="user2"
-            type="text"
-            placeholder=" "
-          />
-          <label class="label__placeholder" for="user">User ID</label>
-          <div class="error"></div>
-        </div>
-        <div class="form__input-container">
-          <input
-            class="input__placeholder"
-            id="email"
-            type="text"
-            placeholder=" "
-          />
-          <label class="label__placeholder" for="user">Email</label>
-          <div class="error"></div>
-        </div>
-        <div class="error"></div>
 
-        <div class="form__input-container">
-          <input
-            class="input__placeholder"
-            id="password2"
-            type="password"
-            placeholder=" "
-          />
-          <label class="label__placeholder" for="password">Password</label>
-          <div class="error"></div>
+        <div class="form__group">
+          <div class="form__input-container">
+            <input
+              class="input__placeholder"
+              id="user2"
+              type="text"
+              placeholder=" "
+            />
+            <label class="label__placeholder" for="user">User ID</label>
+            <div class="error"></div>
+          </div>
+          <div class="form__input-container">
+            <input
+              class="input__placeholder"
+              id="email"
+              type="text"
+              placeholder=" "
+            />
+            <label class="label__placeholder" for="user">Email</label>
+            <div class="error"></div>
+          </div>
+
+          <div class="form__input-container">
+            <input
+              class="input__placeholder"
+              id="password2"
+              type="password"
+              placeholder=" "
+            />
+            <label class="label__placeholder" for="password">Password</label>
+            <div class="error"></div>
+          </div>
         </div>
 
         <div class="form__spacer"></div>
@@ -121,27 +127,31 @@
         <p class="form__under-title">
           Your password must be different from the previous one.
         </p>
-        <div class="form__input-container">
-          <input
-            class="input__placeholder"
-            id="newpassword"
-            type="password"
-            placeholder=" "
-          />
-          <label class="label__placeholder" for="user">New Password</label>
+
+        <div class="form__group">
+          <div class="form__input-container">
+            <input
+              class="input__placeholder"
+              id="newpassword"
+              type="password"
+              placeholder=" "
+            />
+            <label class="label__placeholder" for="user">New Password</label>
+          </div>
+          <div class="form__input-container">
+            <input
+              class="input__placeholder"
+              id="confirmpassword"
+              type="password"
+              placeholder=" "
+            />
+            <label class="label__placeholder" for="password"
+              >Confirm Password</label
+            >
+            <div class="error error__forgot">Passwords do not match</div>
+          </div>
         </div>
-        <div class="form__input-container">
-          <input
-            class="input__placeholder"
-            id="confirmpassword"
-            type="password"
-            placeholder=" "
-          />
-          <label class="label__placeholder" for="password"
-            >Confirm Password</label
-          >
-          <div class="error error__forgot">Passwords do not match</div>
-        </div>
+
         <div class="form__spacer"></div>
         <div class="form__checkbox-remember"></div>
         <button class="button__login button__new-password" type="submit">

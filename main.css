@@ -29,6 +29,28 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+.form__section {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.form__section form {
+  transform: translateY(50px) scale(0.8);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.form__section--active {
+  z-index: 1;
+}
+.form__section--active form {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: all;
+}
+
 form {
   max-width: 500px;
   min-height: 500px;
@@ -36,24 +58,30 @@ form {
   padding: 25px 40px;
   border-radius: 10px;
   font-size: 3.5rem;
-  padding-top: 40px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
 }
 
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
 .form__input-container {
   position: relative;
-  margin-bottom: 20px;
 }
 .form__input-container .error {
-  font-size: 1.8rem;
-  color: rgb(236, 90, 90);
+  font-size: 1.6rem;
+  color: rgb(209, 52, 52);
   padding: 0 5px;
+  position: absolute;
+  top: calc(100% + 10px);
 }
 .form__input-container .error__forgot {
   text-align: center;
-  font-size: 2.3rem;
+  width: 100%;
 }
 .form__input-container .success-message {
   color: rgb(7, 177, 177);
@@ -64,7 +92,6 @@ form {
   border: none;
   border-radius: 15px;
   padding: 30px 12px;
-  margin: 10px 0px;
   background-color: rgba(114, 109, 101, 0.7);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   -webkit-backdrop-filter: blur(5px);
@@ -85,7 +112,7 @@ form {
   text-align: center;
   font-style: italic;
   position: absolute;
-  top: 46%;
+  top: 50%;
   left: 10%;
   transform: translateY(-50%);
   transition: left 0.3s, opacity 0.3s;
@@ -114,8 +141,7 @@ form {
 
 .button__login {
   display: block;
-  margin: 0 auto;
-  margin-top: 3rem;
+  margin: 3rem auto;
   padding: 20px 50px;
   color: var(--color-white);
   min-width: 100px;
@@ -132,7 +158,6 @@ form {
 
 .form__paragraph {
   text-align: center;
-  padding-top: 5rem;
   color: var(--color-white);
   font-size: 2.2rem;
   -webkit-user-select: none;
@@ -171,6 +196,8 @@ form {
   height: 2px;
   width: 80%;
   margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 .form__title {
@@ -187,7 +214,6 @@ form {
 .form__checkbox-remember {
   display: flex;
   justify-content: space-between;
-  padding-top: 1.5rem;
 }
 .form__checkbox-remember a {
   font-size: 2rem;
@@ -244,15 +270,11 @@ form {
   }
 }
 
-.forgot {
-  display: none;
-}
-
 .form__under-title {
   font-size: 2.4rem;
   color: rgb(173, 157, 112);
   text-align: center;
-  padding-bottom: 1rem;
+  padding-bottom: 1.5rem;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
