@@ -46,6 +46,18 @@ form {
 .form__input-container {
   position: relative;
   margin-bottom: 20px;
+  .error {
+    font-size: 1.8rem;
+    color: rgb(236, 90, 90);
+    padding: 0 5px;
+  }
+  .error__forgot {
+    text-align: center;
+    font-size: 2.3rem;
+  }
+  .success-message {
+    color: rgb(7, 177, 177);
+  }
 }
 
 .input__placeholder,
@@ -75,7 +87,7 @@ form {
   text-align: center;
   font-style: italic;
   position: absolute;
-  top: 50%;
+  top: 46%;
   left: 10%;
   transform: translateY(-50%);
   transition: left 0.3s, opacity 0.3s;

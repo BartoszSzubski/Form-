@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="form__section login">
-      <form autocomplete="off">
+      <form id="form" autocomplete="off">
         <p class="form__title">Sign In</p>
         <div class="form__input-container">
           <input
@@ -22,8 +22,10 @@
             id="user"
             type="text"
             placeholder=" "
+            required
           />
           <label class="label__placeholder" for="user">User ID</label>
+          <div class="error">Something is wrong with login</div>
         </div>
         <div class="form__input-container">
           <input
@@ -31,8 +33,10 @@
             id="password"
             type="password"
             placeholder=" "
+            required
           />
           <label class="label__placeholder" for="password">Password</label>
+          <div class="error">Something is wrong with password</div>
         </div>
         <div class="form__spacer"></div>
         <div class="form__checkbox-remember">
@@ -41,12 +45,13 @@
               type="checkbox"
               class="input__checkbox"
               id="checkbox-remember-me"
+              required
             />
             Remember me
           </label>
           <a href="#" class="a__forgot-password">Forgot Password?</a>
         </div>
-        <button class="button__login">Login</button>
+        <button class="button__login" type="submit">Login</button>
         <p class="form__paragraph">
           Not a member?
           <span> <a href="#" class="register-link">Signup now!</a></span>
@@ -60,34 +65,35 @@
         <div class="form__input-container">
           <input
             class="input__placeholder"
-            id="user"
+            id="user2"
             type="text"
             placeholder=" "
           />
           <label class="label__placeholder" for="user">User ID</label>
+          <div class="error"></div>
         </div>
-        <div class="error"></div>
         <div class="form__input-container">
           <input
             class="input__placeholder"
-            id="user"
+            id="email"
             type="text"
             placeholder=" "
           />
           <label class="label__placeholder" for="user">Email</label>
+          <div class="error"></div>
         </div>
         <div class="error"></div>
 
         <div class="form__input-container">
           <input
             class="input__placeholder"
-            id="password"
+            id="password2"
             type="password"
             placeholder=" "
           />
           <label class="label__placeholder" for="password">Password</label>
+          <div class="error"></div>
         </div>
-        <div class="error"></div>
 
         <div class="form__spacer"></div>
         <div class="form__checkbox-remember">
@@ -101,7 +107,7 @@
             <a href="#" class="regulations-button">regulations</a>
           </label>
         </div>
-        <button class="button__login">Register</button>
+        <button class="button__login" type="submit">Register</button>
         <p class="form__paragraph">
           Already have an account?
           <span><a href="#" class="login-link">Login here!</a></span>
@@ -118,8 +124,8 @@
         <div class="form__input-container">
           <input
             class="input__placeholder"
-            id="user"
-            type="text"
+            id="newpassword"
+            type="password"
             placeholder=" "
           />
           <label class="label__placeholder" for="user">New Password</label>
@@ -127,17 +133,18 @@
         <div class="form__input-container">
           <input
             class="input__placeholder"
-            id="password"
-            type="text"
+            id="confirmpassword"
+            type="password"
             placeholder=" "
           />
           <label class="label__placeholder" for="password"
             >Confirm Password</label
           >
+          <div class="error error__forgot">Passwords do not match</div>
         </div>
         <div class="form__spacer"></div>
         <div class="form__checkbox-remember"></div>
-        <button class="button__login button__new-password">
+        <button class="button__login button__new-password" type="submit">
           Create new password
         </button>
         <p class="form__paragraph">
