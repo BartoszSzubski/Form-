@@ -31,6 +31,7 @@ forgotLink.addEventListener("click", () => {
 const loggedForm = document.querySelector(".logged");
 const loggedLink = document.querySelector(".logged-link");
 const buttonLogout = document.querySelector(".button__logout");
+const inputPlaceholder = document.querySelector(".input__placeholder");
 
 loggedLink.addEventListener("click", () => {
   loggedForm.classList.add("form__section--active");
@@ -40,6 +41,10 @@ loggedLink.addEventListener("click", () => {
 buttonLogout.addEventListener("click", () => {
   loggedForm.classList.remove("form__section--active");
   loginForm.classList.add("form__section--active");
+  showError(user, " ");
+  showError(password, " ");
+  inputPlaceholder.value = "";
+  password.value = "";
 });
 
 //terms of use section
@@ -132,13 +137,19 @@ showSuccess(password, "");
 const eyeIcon = document.querySelector(".eye-icon");
 const eyeOpen = document.querySelector(".eye-open");
 const eyeClose = document.querySelector(".eye-close");
-//id password
+//id password //newpassword & confirmpassword //passwordregister
 eyeIcon.addEventListener("click", () => {
   if (password.type === "password") {
     password.type = "text";
+    newPassword.type = "text";
+    confirmPassword.type = "text";
+    passwordRegister.type = "text";
     eyeIcon.src = "images/eye-open.png";
   } else {
     password.type = "password";
+    newPassword.type = "password";
+    confirmPassword.type = "password";
+    passwordRegister.type = "password";
     eyeIcon.src = "images/eye-close.png";
   }
 });
