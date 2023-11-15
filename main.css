@@ -86,6 +86,21 @@ form {
 .form__input-container .success-message {
   color: rgb(7, 177, 177);
 }
+.form__input-container .eye-icon {
+  position: absolute;
+  z-index: 1;
+  right: 5%;
+  top: 40%;
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+}
+.form__input-container .eye-close {
+  filter: invert(60%);
+}
+.form__input-container .eye-open {
+  display: none;
+}
 
 .input__placeholder,
 .button__login {
@@ -221,10 +236,10 @@ form {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-  color: var(--color-white);
+  color: rgb(173, 157, 112);
 }
 .form__checkbox-remember a:hover {
-  color: rgb(173, 157, 112);
+  color: var(--turquoise);
 }
 .form__checkbox-remember .label__input-checkbox {
   font-size: 2rem;

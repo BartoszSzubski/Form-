@@ -30,6 +30,17 @@
             <div class="error">Something is wrong with login</div>
           </div>
           <div class="form__input-container">
+            <img
+              src="images/eye-close.png"
+              alt="closed eye icon"
+              class="eye-icon eye-close"
+            />
+            <img
+              src="images/eye-open.png"
+              alt="opened eye icon"
+              class="eye-icon eye-open"
+            />
+
             <input
               class="input__placeholder"
               id="password"
@@ -37,8 +48,8 @@
               placeholder=" "
               required
             />
-            <label class="label__placeholder" for="password">Password</label>
-            <div class="error">Something is wrong with password</div>
+            <label class="label__placeholder" for="password">Password </label>
+            <div class="error"></div>
           </div>
         </div>
 
@@ -55,7 +66,7 @@
           </label>
           <a href="#" class="a__forgot-password">Forgot Password?</a>
         </div>
-        <button class="button__login" type="submit">Login</button>
+        <button class="button__login logged-link" type="submit">Login</button>
         <p class="form__paragraph">
           Not a member?
           <span> <a href="#" class="register-link">Signup now!</a></span>
@@ -71,7 +82,7 @@
           <div class="form__input-container">
             <input
               class="input__placeholder"
-              id="user2"
+              id="userregister"
               type="text"
               placeholder=" "
             />
@@ -90,9 +101,19 @@
           </div>
 
           <div class="form__input-container">
+            <img
+              src="images/eye-close.png"
+              alt="closed eye icon"
+              class="eye-icon eye-close"
+            />
+            <img
+              src="images/eye-open.png"
+              alt="opened eye icon"
+              class="eye-icon eye-open"
+            />
             <input
               class="input__placeholder"
-              id="password2"
+              id="passwordregister"
               type="password"
               placeholder=" "
             />
@@ -113,7 +134,9 @@
             <a href="#" class="regulations-button">regulations</a>
           </label>
         </div>
-        <button class="button__login" type="submit">Register</button>
+        <button class="button__login button__register" type="submit">
+          Register
+        </button>
         <p class="form__paragraph">
           Already have an account?
           <span><a href="#" class="login-link">Login here!</a></span>
@@ -130,6 +153,16 @@
 
         <div class="form__group">
           <div class="form__input-container">
+            <img
+              src="images/eye-close.png"
+              alt="closed eye icon"
+              class="eye-icon eye-close"
+            />
+            <img
+              src="images/eye-open.png"
+              alt="opened eye icon"
+              class="eye-icon eye-open"
+            />
             <input
               class="input__placeholder"
               id="newpassword"
@@ -230,6 +263,22 @@
           <button class="terms__button btn-decline">Decline</button>
         </div>
       </div>
+    </div>
+    <!-- logged section-->
+    <div class="form__section logged">
+      <form id="form" autocomplete="off">
+        <p class="form__title">You have logged in</p>
+        <p class="form__under-title">
+          Welcome to our platform! 🌟 Explore a seamless and secure login
+          experience tailored just for you. Join our community to unlock
+          exciting features and stay connected. Your journey begins here, where
+          every login opens a door to endless possibilities. 🚀
+        </p>
+
+        <button class="button__login button__logout" type="submit">
+          Logout
+        </button>
+      </form>
     </div>
     <script src="script.js"></script>
   </body>

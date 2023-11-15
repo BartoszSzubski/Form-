@@ -89,6 +89,22 @@ form {
   .success-message {
     color: rgb(7, 177, 177);
   }
+  .eye-icon {
+    position: absolute;
+    z-index: 1;
+    right: 5%;
+    top: 40%;
+    width: 40px;
+    height: auto;
+
+    cursor: pointer;
+  }
+  .eye-close {
+    filter: invert(60%);
+  }
+  .eye-open {
+    display: none;
+  }
 }
 
 .input__placeholder,
@@ -219,9 +235,9 @@ form {
     font-size: 2rem;
     text-decoration: none;
     user-select: none;
-    color: var(--color-white);
+    color: rgb(173, 157, 112);
     &:hover {
-      color: rgb(173, 157, 112);
+      color: var(--turquoise);
     }
   }
   .label__input-checkbox {
