@@ -83,23 +83,32 @@ form {
   text-align: center;
   width: 100%;
 }
-.form__input-container .success-message {
+.form__input-container.success .error {
   color: rgb(7, 177, 177);
 }
 .form__input-container .eye-icon {
   position: absolute;
   z-index: 1;
   right: 5%;
-  top: 40%;
+  top: 2%;
   width: 40px;
-  height: auto;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
   cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
+.form__input-container .eye-icon--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.form__input-container .eye-open,
 .form__input-container .eye-close {
   filter: invert(60%);
-}
-.form__input-container .eye-open {
-  display: none;
 }
 
 .input__placeholder,

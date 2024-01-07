@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="main.css" />
-    <title>Document</title>
+    <title>Form App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="form__section form__section--active login">
-      <form id="form" autocomplete="off">
+      <form id="form" autocomplete="off" action="">
         <p class="form__title">Sign In</p>
 
         <div class="form__group">
@@ -60,7 +60,6 @@
               type="checkbox"
               class="input__checkbox"
               id="checkbox-remember-me"
-              required
             />
             Remember me
           </label>
@@ -75,7 +74,7 @@
     </div>
     <!--section distinction-->
     <div class="form__section register">
-      <form autocomplete="off">
+      <form autocomplete="off" action="">
         <p class="form__title">Registration</p>
 
         <div class="form__group">
@@ -129,6 +128,7 @@
               type="checkbox"
               class="input__checkbox"
               id="checkbox-regulations"
+              required
             />
             I have read and comply with the
             <a href="#" class="regulations-button">regulations</a>
@@ -145,7 +145,7 @@
     </div>
     <!--forgot password section-->
     <div class="form__section forgot">
-      <form autocomplete="off">
+      <form autocomplete="off" action="">
         <p class="form__title">Reset your password</p>
         <p class="form__under-title">
           Your password must be different from the previous one.
@@ -170,6 +170,7 @@
               placeholder=" "
             />
             <label class="label__placeholder" for="user">New Password</label>
+            <div class="error error__forgot"></div>
           </div>
           <div class="form__input-container">
             <input
@@ -181,7 +182,7 @@
             <label class="label__placeholder" for="password"
               >Confirm Password</label
             >
-            <div class="error error__forgot">Passwords do not match</div>
+            <div class="error error__forgot"></div>
           </div>
         </div>
 
@@ -266,7 +267,7 @@
     </div>
     <!-- logged section-->
     <div class="form__section logged">
-      <form id="form" autocomplete="off">
+      <form id="form" autocomplete="off" action="">
         <p class="form__title">You have logged in</p>
         <p class="form__under-title">
           Welcome to our platform! 🌟 Explore a seamless and secure login
@@ -280,6 +281,7 @@
         </button>
       </form>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,286 +1,361 @@
-const loginForm = document.querySelector(".login");
-const registerForm = document.querySelector(".register");
+const loginView = document.querySelector(".login");
+const registerView = document.querySelector(".register");
+const forgotView = document.querySelector(".forgot");
+const loggedView = document.querySelector(".logged");
+
 const loginLink = document.querySelector(".login-link");
 const registerLink = document.querySelector(".register-link");
-
-loginLink.addEventListener("click", () => {
-  loginForm.classList.add("form__section--active");
-  registerForm.classList.remove("form__section--active");
-});
-
-registerLink.addEventListener("click", () => {
-  registerForm.classList.add("form__section--active");
-  loginForm.classList.remove("form__section--active");
-});
-
-//forgot password section
-const aForgotPass = document.querySelector(".a__forgot-password");
-const forgotForm = document.querySelector(".forgot");
-const forgotLink = document.querySelector(".forgot-link");
-
-aForgotPass.addEventListener("click", () => {
-  forgotForm.classList.add("form__section--active");
-  loginForm.classList.remove("form__section--active");
-});
-
-forgotLink.addEventListener("click", () => {
-  loginForm.classList.add("form__section--active");
-  forgotForm.classList.remove("form__section--active");
-});
-//logged in section
-const loggedForm = document.querySelector(".logged");
-const loggedLink = document.querySelector(".logged-link");
+const forgotLink = document.querySelector(".a__forgot-password");
+const forgotLinkBack = document.querySelector(".forgot-link");
 const buttonLogout = document.querySelector(".button__logout");
-const inputPlaceholder = document.querySelector(".input__placeholder");
 
-loggedLink.addEventListener("click", () => {
-  loggedForm.classList.add("form__section--active");
-  loginForm.classList.remove("form__section--active");
-});
+let currentView = document.querySelector(".form__section--active");
 
-buttonLogout.addEventListener("click", () => {
-  loggedForm.classList.remove("form__section--active");
-  loginForm.classList.add("form__section--active");
-  showError(user, " ");
-  showError(password, " ");
-  inputPlaceholder.value = "";
-  password.value = "";
-});
+handleViews();
+liveValidation();
+handleFormSubmits();
+handleTogglePasswordVisibility();
 
-//terms of use section
-const popupTerms = document.querySelector(".popup__terms__section");
-const buttonAccept = document.querySelector(".btn-accept");
-const buttonDecline = document.querySelector(".btn-decline");
-const openRegulations = document.querySelector(".regulations-button");
+function liveValidation() {
+  loginLiveValidation();
+  forgotPassowrdLiveValidation();
+  registerLiveValidation();
+}
 
-buttonAccept.addEventListener("click", () => {
-  popupTerms.style.display = "none";
-});
+function handleFormSubmits() {
+  loginSubmit();
+  registerSubmit();
+  forgotPasswordSubmit();
+}
 
-buttonDecline.addEventListener("click", () => {
-  popupTerms.style.display = "none";
-});
+function handleViews() {
+  handleRegulationsModal();
 
-openRegulations.addEventListener("click", () => {
-  popupTerms.style.display = "flex";
-});
+  loginLink.addEventListener("click", () => {
+    changeView(loginView);
+  });
+  registerLink.addEventListener("click", () => {
+    changeView(registerView);
+  });
+  forgotLink.addEventListener("click", () => {
+    changeView(forgotView);
+  });
+  forgotLinkBack.addEventListener("click", () => {
+    changeView(loginView);
+  });
+  buttonLogout.addEventListener("click", () => {
+    changeView(loginView);
+  });
+}
 
-//input section
-const form = document.getElementById("form");
-const user = document.getElementById("user");
-const password = document.getElementById("password");
+function changeView(targetView) {
+  targetView.classList.add("form__section--active");
+  currentView.classList.remove("form__section--active");
+  currentView = targetView;
+  clearForms();
+}
 
-// blur
-user.addEventListener("blur", () => {
-  validateUserInput();
-});
+function clearForms() {
+  const errors = document.querySelectorAll(".error");
+  const inputs = document.querySelectorAll("input");
 
-password.addEventListener("blur", () => {
-  validatePasswordInput();
-});
+  errors.forEach((error) => {
+    error.innerText = "";
+  });
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  validateInputs();
-});
+  inputs.forEach((input) => {
+    if (input.type == "checkbox") {
+      input.checked = false;
+    }
 
-// login validation settings
-const showError = (element, message) => {
+    input.value = null;
+  });
+}
+
+function handleRegulationsModal() {
+  const popupTerms = document.querySelector(".popup__terms__section");
+  const buttonAccept = document.querySelector(".btn-accept");
+  const buttonDecline = document.querySelector(".btn-decline");
+  const openRegulations = document.querySelector(".regulations-button");
+
+  buttonAccept.addEventListener("click", () => {
+    popupTerms.style.display = "none";
+  });
+
+  buttonDecline.addEventListener("click", () => {
+    popupTerms.style.display = "none";
+  });
+
+  openRegulations.addEventListener("click", () => {
+    popupTerms.style.display = "flex";
+  });
+}
+
+function handleTogglePasswordVisibility() {
+  const passwordInputs = document.querySelectorAll("input[type='password']");
+
+  passwordInputs.forEach((input) => {
+    const inputContainer = input.parentElement;
+    const eyeOpen = inputContainer.querySelector(".eye-open");
+    const eyeClose = inputContainer.querySelector(".eye-close");
+    const forgotView = input.closest(".forgot");
+
+    if (!eyeOpen) return;
+    if (!eyeClose) return;
+
+    eyeOpen.classList.add("eye-icon--hidden");
+
+    // Hide password
+    eyeOpen.addEventListener("click", () => {
+      input.type = "password";
+      eyeClose.classList.remove("eye-icon--hidden");
+      eyeOpen.classList.add("eye-icon--hidden");
+
+      if (forgotView) {
+        const confirmPassword = document.querySelector("#confirmpassword");
+        confirmPassword.type = "password";
+      }
+    });
+
+    // Show password
+    eyeClose.addEventListener("click", () => {
+      input.type = "text";
+      eyeClose.classList.add("eye-icon--hidden");
+      eyeOpen.classList.remove("eye-icon--hidden");
+
+      if (forgotView) {
+        const confirmPassword = document.querySelector("#confirmpassword");
+        confirmPassword.type = "text";
+      }
+    });
+  });
+}
+
+function loginSubmit() {
+  const loginForm = document.querySelector(".login form");
+  const userInput = document.getElementById("user");
+  const passwordInput = document.getElementById("password");
+
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const { isError: isUsernameError, isSuccess: isUsernameSuccess } =
+      validateUsername(userInput);
+    const { isError: isPasswordError, isSuccess: isPasswordSuccess } =
+      validatePassword(passwordInput);
+
+    if (isUsernameSuccess && isPasswordSuccess) {
+      changeView(loggedView);
+    }
+  });
+}
+
+function registerSubmit() {
+  const registerForm = document.querySelector(".register form");
+  const userInput = document.getElementById("userregister");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("passwordregister");
+
+  registerForm.addEventListener("submit", (e) => {
+    const { isError: isUsernameError, isSuccess: isUsernameSuccess } =
+      validateUsername(userInput);
+    const { isError: isPasswordError, isSuccess: isPasswordSuccess } =
+      validatePassword(passwordInput);
+    const { isError: isEmailError, isSuccess: isEmailSuccess } =
+      validateEmail(emailInput);
+
+    if (isUsernameSuccess && isPasswordSuccess && isEmailSuccess) {
+      changeView(loginView);
+    }
+  });
+}
+
+function forgotPasswordSubmit() {
+  const forgotForm = document.querySelector(".forgot form");
+  const newPassword = document.getElementById("newpassword");
+  const confirmPassword = document.getElementById("confirmpassword");
+  forgotForm.addEventListener("submit", (e) => {
+    const { isError: isPasswordError, isSuccess: isPasswordSuccess } =
+      validatePassword(newPassword);
+    const { isError: isMatchError, isSuccess: isMatchSuccess } =
+      validatePasswordsMatch(newPassword, confirmPassword);
+
+    if (isMatchSuccess && isPasswordSuccess) {
+      changeView(loginView);
+    }
+  });
+}
+
+function loginLiveValidation() {
+  const userInput = document.getElementById("user");
+  const passwordInput = document.getElementById("password");
+
+  userInput.addEventListener("blur", () => {
+    const { isError, isSuccess, msg } = validateUsername(userInput);
+    if (isError) showError(userInput, msg);
+    if (isSuccess) showSuccess(userInput, "");
+  });
+
+  passwordInput.addEventListener("blur", () => {
+    const { isError, isSuccess, msg } = validatePassword(passwordInput);
+    if (isError) showError(passwordInput, msg);
+    if (isSuccess) showSuccess(passwordInput, "");
+  });
+}
+
+function registerLiveValidation() {
+  const userInput = document.getElementById("userregister");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("passwordregister");
+
+  userInput.addEventListener("blur", () => {
+    const { isError, isSuccess, msg } = validateUsername(userInput);
+    if (isError) showError(userInput, msg);
+    if (isSuccess) showSuccess(userInput, "");
+  });
+
+  passwordInput.addEventListener("blur", () => {
+    const { isError, isSuccess, msg } = validatePassword(passwordInput);
+    if (isError) showError(passwordInput, msg);
+    if (isSuccess) showSuccess(passwordInput, "");
+  });
+
+  emailInput.addEventListener("blur", () => {
+    const { isError, isSuccess, msg } = validateEmail(emailInput);
+    if (isError) showError(emailInput, msg);
+    if (isSuccess) showSuccess(emailInput, "");
+  });
+}
+
+function forgotPassowrdLiveValidation() {
+  const newPassword = document.getElementById("newpassword");
+  const confirmPassword = document.getElementById("confirmpassword");
+
+  newPassword.addEventListener("blur", () => {
+    const { isError, isSuccess, msg } = validatePassword(newPassword);
+    if (isError) showError(newPassword, msg);
+    if (isSuccess) showSuccess(newPassword, "");
+  });
+
+  confirmPassword.addEventListener("blur", () => {
+    const { isError, isSuccess, msg } = validatePasswordsMatch(
+      newPassword,
+      confirmPassword
+    );
+    if (isError) showError(confirmPassword, msg);
+    if (isSuccess) showSuccess(confirmPassword, "Passwords match!");
+  });
+}
+
+function showError(element, message) {
   const inputControl = element.parentElement;
   const errorDisplay = inputControl.querySelector(".error");
 
   errorDisplay.innerText = message;
-  inputControl.classList.add("error");
-};
+  inputControl.classList.add("group-error");
+  inputControl.classList.remove("success");
+}
 
-const showSuccess = (element, message) => {
+function showSuccess(element, message) {
   const inputControl = element.parentElement;
   const errorDisplay = inputControl.querySelector(".error");
 
   errorDisplay.innerText = message;
-  inputControl.classList.remove("error");
-};
+  inputControl.classList.remove("group-error");
+  inputControl.classList.add("success");
+}
 
-const validateUserInput = (isOnInput) => {
-  const userValue = user.value.trim();
+function validateUsername(userInput) {
+  const userValue = userInput.value.trim();
+  let isError = false;
+  let isSuccess = false;
+  let msg = "";
 
   if (userValue === "") {
-    showError(user, "Username is required");
+    isError = true;
+    msg = "Username is required";
   } else if (userValue.length < 6) {
-    showError(user, "Username must be at least 6 characters");
+    isError = true;
+    msg = "Username must be at least 6 characters";
   } else {
-    showSuccess(user, "");
+    isSuccess = true;
   }
-};
 
-const validatePasswordInput = () => {
-  const passwordValue = password.value.trim();
+  return { isError, isSuccess, msg };
+}
 
-  if (passwordValue === "") {
-    showError(password, "Password is required");
-  } else if (passwordValue.length < 8) {
-    showError(password, "Password must contain at least 8 characters");
-  } else if (!/[`~!@#$%^&*()_+-=;:'"|{}.>,</?]/.test(passwordValue)) {
-    showError(password, "Minimum one special character required");
-  } else if (!/\d/.test(passwordValue)) {
-    showError(password, "Password must contain at least one digit");
-  } else {
-    showSuccess(password, "");
-  }
-};
-
-// error reset
-showSuccess(user, "");
-showSuccess(password, "");
-
-//hide and show password section
-const eyeIcon = document.querySelector(".eye-icon");
-const eyeOpen = document.querySelector(".eye-open");
-const eyeClose = document.querySelector(".eye-close");
-//id password //newpassword & confirmpassword //passwordregister
-eyeIcon.addEventListener("click", () => {
-  if (password.type === "password") {
-    password.type = "text";
-    newPassword.type = "text";
-    confirmPassword.type = "text";
-    passwordRegister.type = "text";
-    eyeIcon.src = "images/eye-open.png";
-  } else {
-    password.type = "password";
-    newPassword.type = "password";
-    confirmPassword.type = "password";
-    passwordRegister.type = "password";
-    eyeIcon.src = "images/eye-close.png";
-  }
-});
-//forgot password validation section
-
-const newPassword = document.getElementById("newpassword");
-const confirmPassword = document.getElementById("confirmpassword");
-const confirmPasswordError = document.querySelector(".error__forgot");
-const forgotPasswordSubmit = document.querySelector(".button__new-password");
-
-confirmPassword.addEventListener("blur", () => {
-  validatePasswordsMatch();
-});
-
-forgotPasswordSubmit.addEventListener("click", () => {
-  validatePasswordsMatch(true);
-});
-
-const validatePasswordsMatch = (isSubmit = false) => {
-  const newPasswordValue = newPassword.value.trim();
-  const confirmPasswordValue = confirmPassword.value.trim();
-
-  if (newPasswordValue === "" || confirmPasswordValue === "") {
-    showError(confirmPasswordError, "Passwords cannot be empty");
-    confirmPasswordError.classList.remove("success-message");
-  } else if (newPasswordValue !== confirmPasswordValue) {
-    showError(confirmPasswordError, "Passwords do not match");
-    confirmPasswordError.classList.remove("success-message");
-  } else if (newPasswordValue.length < 8) {
-    showError(
-      confirmPasswordError,
-      "Password must contain at least 8 characters"
-    );
-    confirmPasswordError.classList.remove("success-message");
-  } else {
-    showSuccess(confirmPasswordError, "Passwords match!");
-    confirmPasswordError.classList.add("success-message");
-    if (isSubmit) {
-      loginForm.classList.add("form__section--active");
-      forgotForm.classList.remove("form__section--active");
-    }
-  }
-};
-
-showSuccess(confirmPasswordError, "");
-
-// register validation section
-const userRegister = document.getElementById("userregister");
-const email = document.getElementById("email");
-const passwordRegister = document.getElementById("passwordregister");
-const buttonRegister = document.querySelector(".button__register");
-
-userRegister.addEventListener("blur", () => {
-  validateUserRegisterInput();
-});
-
-email.addEventListener("blur", () => {
-  validateEmailInput();
-});
-
-passwordRegister.addEventListener("blur", () => {
-  validatePasswordRegisterInput();
-});
-
-const validateEmailInput = () => {
-  const emailValue = email.value.trim();
+function validateEmail(emailInput) {
+  const emailValue = emailInput.value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let isError = false;
+  let isSuccess = false;
+  let msg = "";
 
   if (emailValue === "") {
-    showError(email, "Email is required");
-  } else if (!isValidEmail(emailValue)) {
-    showError(email, "Invalid email address");
+    isError = true;
+    msg = "Email is required";
+  } else if (!emailRegex.test(emailValue)) {
+    isError = true;
+    msg = "Invalid email address";
   } else {
-    showSuccess(email, "");
+    isSuccess = true;
   }
-};
 
-const validatePasswordRegisterInput = (isSubmit = false) => {
-  const passwordValue = passwordRegister.value.trim();
+  return { isError, isSuccess, msg };
+}
+
+function validatePassword(passwordInput) {
+  const specialCharsRegex = /\W|_/g;
+  const passwordValue = passwordInput.value.trim();
+  let isError = false;
+  let isSuccess = false;
+  let msg = "";
 
   if (passwordValue === "") {
-    showError(passwordRegister, "Password is required");
+    isError = true;
+    msg = "Password is required";
   } else if (passwordValue.length < 8) {
-    showError(passwordRegister, "Password must contain at least 8 characters");
-  } else if (!/[`~!@#$%^&*()_+-=;:'"|{}.>,</?]/.test(passwordValue)) {
-    showError(passwordRegister, "Minimum one special character required");
+    isError = true;
+    msg = "Password must contain at least 8 characters";
+  } else if (!specialCharsRegex.test(passwordValue)) {
+    isError = true;
+    msg = "Minimum one special character required";
   } else if (!/\d/.test(passwordValue)) {
-    showError(passwordRegister, "Password must contain at least one digit");
+    isError = true;
+    msg = "Password must contain at least one digit";
   } else {
-    showSuccess(passwordRegister, "");
-    if (isSubmit) {
-      registerForm.classList.remove("form__section--active");
-      loginForm.classList.add("form__section--active");
-    }
+    isSuccess = true;
   }
-};
 
-const isValidEmail = (email, isSubmit = false) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
+  return { isError, isSuccess, msg };
+}
 
-const validateUserRegisterInput = (isSubmit = false) => {
-  const userValue = userRegister.value.trim();
+function validatePasswordsMatch(newPassword, confirmPassword) {
+  const newPasswordValue = newPassword.value.trim();
+  const confirmPasswordValue = confirmPassword.value.trim();
+  let isError = false;
+  let isSuccess = false;
+  let msg = "";
 
-  if (userValue === "") {
-    showError(userRegister, "Username is required");
-  } else if (userValue.length < 6) {
-    showError(userRegister, "Username must be at least 6 characters");
+  // Check if new password is valid first
+  const { isError: newPasswordError, isSuccess: newPasswordSucces } =
+    validatePassword(newPassword);
+
+  if (newPasswordError) {
+    isError = true;
+    return { isError, isSuccess, msg };
+  }
+
+  // Then compare both passwords
+  if (newPasswordValue === "" || confirmPasswordValue === "") {
+    isError = true;
+    msg = "Passwords cannot be empty";
+  } else if (newPasswordValue !== confirmPasswordValue) {
+    isError = true;
+    msg = "Passwords do not match";
   } else {
-    showSuccess(userRegister, "");
-    if (isSubmit) {
-      validateRegistrationForm();
-    }
+    isSuccess = true;
   }
-};
 
-showSuccess(userRegister, "");
-showSuccess(email, "");
-showSuccess(passwordRegister, "");
-
-const validateRegistrationForm = () => {
-  const isPasswordValid = validatePasswordRegisterInput(true);
-  const isEmailValid = isValidEmail(email.value.trim(), true);
-  const isUserValid = validateUserRegisterInput(true);
-
-  if (isPasswordValid && isEmailValid && isUserValid) {
-    registerForm.classList.remove("form__section--active");
-    loginForm.classList.add("form__section--active");
-  }
-};
-
-buttonRegister.addEventListener("click", () => {
-  validateRegistrationForm();
-});
+  return { isError, isSuccess, msg };
+}
